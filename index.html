@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bule Edan</title>
+
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+background:#000;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.live-container{
+width:100%;
+max-width:430px;
+aspect-ratio:9/16;
+position:relative;
+overflow:hidden;
+border-radius:12px;
+background:#000;
+}
+
+.live-video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* LIVE badge */
+
+.live-badge{
+position:absolute;
+top:12px;
+left:12px;
+background:#ff0033;
+color:#fff;
+font-size:12px;
+padding:4px 10px;
+border-radius:6px;
+font-weight:bold;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.4}
+100%{opacity:1}
+}
+
+/* viewer */
+
+.viewer{
+position:absolute;
+top:12px;
+right:12px;
+background:rgba(0,0,0,.6);
+color:#fff;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+}
+
+.viewer{
+background:rgba(0,0,0,.6);
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+}
+
+/* profile */
+
+.header{
+position:absolute;
+top:45px;
+left:10px;
+display:flex;
+align-items:center;
+color:#fff;
+}
+
+.header img{
+width:38px;
+height:38px;
+border-radius:50%;
+border:2px solid #fff;
+margin-right:8px;
+}
+
+/* chat */
+
+.chat-box{
+position:absolute;
+bottom:120px;
+left:10px;
+width:70%;
+max-height:170px;
+overflow:hidden;
+}
+
+.chat-message{
+background:rgba(0,0,0,.5);
+color:#fff;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+margin-bottom:6px;
+width:fit-content;
+}
+
+/* icons */
+
+.live-icons{
+position:absolute;
+right:10px;
+bottom:140px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.live-icons img{
+width:40px;
+height:40px;
+background:rgba(0,0,0,.6);
+padding:8px;
+border-radius:50%;
+cursor:pointer;
+}
+
+/* hearts */
+
+.hearts{
+position:absolute;
+bottom:100px;
+right:20px;
+pointer-events:none;
+}
+
+.heart{
+position:absolute;
+color:#ff2d55;
+font-size:22px;
+animation:float 4s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-260px);opacity:0}
+}
+
+/* gift */
+
+.gift{
+position:absolute;
+bottom:200px;
+left:10px;
+background:linear-gradient(45deg,#ff3c5f,#ff7b8a);
+color:#fff;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+display:none;
+}
+
+/* play */
+
+.play-button{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,.6);
+border-radius:50%;
+padding:20px;
+cursor:pointer;
+}
+
+.play-button svg{
+width:34px;
+fill:#fff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="live-container">
+
+<img class="live-video" src="https://icungsilet.github.io/watchmoment-l/valeri.jpg">
+
+<div class="live-badge">LIVE</div>
+
+<div class="viewer" id="viewer">30.3K watching</div>
+
+<div class="header">
+<img src="https://icungsilet.github.io/watchmoment-l/valeri2.jpg">
+<div>Valarie Ruvalcaba</div>
+</div>
+
+<div class="chat-box" id="chat"></div>
+
+<div class="gift" id="gift">🎁 Someone sent a gift</div>
+
+<div class="live-icons">
+
+<img src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png">
+<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
+<img src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png">
+
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="play-button" onclick="openLink()">
+<svg viewBox="0 0 24 24">
+<path d="M8 5v14l11-7z"/>
+</svg>
+</div>
+
+</div>
+
+<script>
+
+function openLink(){
+window.open("https://achelessvase.com/f9hhubydk?key=b50f66e969f66dabeb91f9dc553c10cf","_blank")
+}
+
+/* hearts animation */
+
+function createHeart(){
+
+let heart=document.createElement("div")
+heart.className="heart"
+heart.innerHTML="❤"
+heart.style.left=Math.random()*20+"px"
+
+document.getElementById("hearts").appendChild(heart)
+
+setTimeout(()=>heart.remove(),4000)
+
+}
+
+setInterval(createHeart,800)
+
+/* chat UI */
+
+/* BIG LIVE CHAT DATABASE */
+
+const names=[
+"Emily","Michael","Jessica","Ashley","Ryan","Daniel","Sophia","Chris","Olivia","David",
+"Emma","James","Isabella","Ethan","Mia","Lucas","Ava","Alexander","Charlotte","Benjamin",
+"Amelia","Henry","Harper","Jack","Lily","Logan","Chloe","Matthew","Grace","Nathan",
+"Zoe","Leo","Ella","Sebastian","Scarlett","Samuel","Victoria","Noah","Aria","William",
+"Layla","Joseph","Riley","Gabriel","Nora","Anthony","Hazel","Andrew","Aurora","Luke",
+"Evelyn","Julian","Addison","Hunter","Stella","Isaac","Paisley","Levi","Skylar","Aaron",
+"Ellie","Connor","Sadie","Jeremiah","Bella","Wyatt","Samantha","Owen","Lucy","Nathaniel",
+"Ariana","Charles","Madison","Dominic","Natalie","Caleb","Penelope","Adrian","Ruby","Miles",
+"Alice","Jason","Claire","Landon","Brooklyn","Carson","Savannah","Robert","Luna","Eli",
+"Sophie","Adam","Hannah","Thomas","Eva","Kevin","Melanie","Jordan","Alyssa","Brandon"
+]
+
+const compliments=[
+"wow you look amazing 😍",
+"beautiful smile",
+"omg stunning",
+"queen energy 👑",
+"can't stop watching",
+"she is so gorgeous",
+"angel face wow",
+"perfect beauty",
+"absolutely beautiful",
+"wow she looks like a model",
+"so pretty wow",
+"unreal beauty",
+"wow stunning girl",
+"this smile is everything",
+"goddess vibes",
+"too beautiful",
+"wow gorgeous",
+"so elegant",
+"pure beauty",
+"mesmerizing smile",
+"perfect face",
+"wow breathtaking",
+"this is unreal",
+"so cute omg",
+"wow amazing girl",
+"I love her smile",
+"wow stunning beauty",
+"she looks perfect",
+"angel vibes",
+"so beautiful wow",
+"wow incredible",
+"she is perfect",
+"model vibes",
+"wow unbelievable beauty",
+"so attractive",
+"wow charming smile",
+"she looks amazing",
+"gorgeous girl",
+"wow flawless beauty",
+"wow queen"
+]
+
+function randomItem(arr){
+return arr[Math.floor(Math.random()*arr.length)]
+}
+
+setInterval(()=>{
+
+let name=randomItem(names)
+let text=randomItem(compliments)
+
+let div=document.createElement("div")
+div.className="chat-message"
+div.innerText=name+": "+text
+
+let chat=document.getElementById("chat")
+chat.appendChild(div)
+
+if(chat.children.length>8){
+chat.removeChild(chat.children[0])
+}
+
+},1200)
+
+/* gift animation */
+
+setInterval(()=>{
+
+let g=document.getElementById("gift")
+
+g.style.display="block"
+
+setTimeout(()=>g.style.display="none",3000)
+
+},9000)
+
+</script>
+
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4716773,4,9,110,60,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4716773&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+</body>
+</html>
